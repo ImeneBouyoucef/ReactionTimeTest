@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "name": "Emscripten",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "/home/imene/emsdk/upstream/emscripten/system/include"
+      ],
+      "compilerPath": "/home/imene/emsdk/upstream/emscripten/emcc",
+      "cStandard": "c11",
+      "intelliSenseMode": "linux-gcc-x64"
+    }
+  ],
+  "version": 4
+}
