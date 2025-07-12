@@ -29,6 +29,10 @@ h1{
     height: min(270vw, 590px);
     background-color: skyblue;
     border-radius: 10px;
+    font-size: clamp(20px, 6vw, 36px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .start-button {

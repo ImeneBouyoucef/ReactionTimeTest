@@ -12,6 +12,51 @@
 
     <button class="start-button">Start</button>
 
-    <script type="module" src="main.js"></script>
+    <script src="getTime.js"></script>
 </body>
 </html>
+
+<script>
+    let startTime = 0;
+    let ready = false;
+    let getTime;
+
+    createModule().then((Module) => {
+        getTime = Module.cwrap('current_time_ms', 'number', []);
+
+        const startButton = document.querySelector('.start-button');
+        const area = document.querySelector('.click-area');
+        const output = document.createElement('p');
+        document.body.appendChild(output);
+
+        startButton.addEventListener('click', () => {
+        startButton.disabled = true;
+        area.style.backgroundColor = 'red';
+        area.innerHTML = 'Get ready...';
+
+        const delay = Math.random() * 2000 + 1000; // between 1 and 3 sec
+
+        setTimeout(() => {
+            area.style.backgroundColor = 'green';
+            startTime = getTime(); // exact time at the time of change
+            ready = true;
+            area.innerHTML = 'Click !';
+        }, delay);
+        });
+        area.addEventListener('click', () => {
+        if (!ready) {
+            startButton.disabled = false;
+            area.style.backgroundColor = 'skyblue';
+            return;
+        }
+
+        const clickTime = getTime();
+        const reactionTime = (clickTime - startTime).toFixed(2);
+        area.innerHTML = `Time reaction : ${reactionTime} ms`;
+
+        area.style.backgroundColor = 'skyblue';
+        ready = false;
+        startButton.disabled = false;
+        });
+    });
+</script>
